@@ -18,6 +18,20 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
+        android:id="@+id/appTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="30dp"
+        android:text="Hiker's Watch"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/locationTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +40,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAlignment="viewStart"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appTitleTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
