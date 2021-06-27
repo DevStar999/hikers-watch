@@ -53,24 +53,24 @@ public class MainActivity extends AppCompatActivity {
     private void setLocationTextOnTextView(Location locationOnMap) {
         Log.i("Info", "Location = " + locationOnMap.toString());
         String textForLocationTextView = "";
-        textForLocationTextView += appendString("Latitude: ", "We could not find Latitude :(",
-                Double.toString(BigDecimal
-                        .valueOf(locationOnMap.getLatitude()).setScale(2, RoundingMode.HALF_UP)
+        textForLocationTextView += appendString("Latitude: ", "We could not find latitude :(",
+                Double.toString(BigDecimal.valueOf(locationOnMap.getLatitude())
+                        .setScale(2, RoundingMode.HALF_UP)
                         .doubleValue()), "\n\n");
 
-        textForLocationTextView += appendString("Longitude: ", "We could not find Longitude :(",
-                Double.toString(BigDecimal
-                        .valueOf(locationOnMap.getLongitude()).setScale(2, RoundingMode.HALF_UP)
+        textForLocationTextView += appendString("Longitude: ", "We could not find longitude :(",
+                Double.toString(BigDecimal.valueOf(locationOnMap.getLongitude())
+                        .setScale(2, RoundingMode.HALF_UP)
                         .doubleValue()), "\n\n");
 
-        textForLocationTextView += appendString("Accuracy: ", "We could not find Accuracy :(",
-                Double.toString(BigDecimal
-                        .valueOf(locationOnMap.getAccuracy()).setScale(2, RoundingMode.HALF_UP)
+        textForLocationTextView += appendString("Accuracy: ", "We could not find accuracy :(",
+                Double.toString(BigDecimal.valueOf(locationOnMap.getAccuracy())
+                        .setScale(2, RoundingMode.HALF_UP)
                         .doubleValue()), "\n\n");
 
-        textForLocationTextView += appendString("Altitude: ", "We could not find Altitude :(",
-                Double.toString(BigDecimal
-                        .valueOf(locationOnMap.getAltitude()).setScale(2, RoundingMode.HALF_UP)
+        textForLocationTextView += appendString("Altitude: ", "We could not find altitude :(",
+                Double.toString(BigDecimal.valueOf(locationOnMap.getAltitude())
+                        .setScale(2, RoundingMode.HALF_UP)
                         .doubleValue()), "\n\n");
 
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -79,15 +79,15 @@ public class MainActivity extends AppCompatActivity {
                     locationOnMap.getLongitude(), 1);
             if (addressList != null && !addressList.isEmpty()) {
                 Log.i("Info", "Address Object: " + addressList.get(0).toString());
-                textForLocationTextView += appendString("Address: ", "We could not find Address :(",
+                textForLocationTextView += appendString("Address: ", "We could not find address :(",
                         addressList.get(0).getThoroughfare(), "");
             }
             else {
-                textForLocationTextView += "Address: " + "We could not find Address :(";
+                textForLocationTextView += "Address: " + "We could not find address :(";
             }
         } catch (IOException e) {
             e.printStackTrace();
-            textForLocationTextView += "Address: " + "We could not find Address :(";
+            textForLocationTextView += "Address: " + "We could not find address :(";
         }
 
         locationTextView.setText(textForLocationTextView);
@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 the battery life of the user's phone and how frequently we want to be updated of the
                 user's location based on time and distance
                 */
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            2000,0, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        2000,0, locationListener);
                 }
             }
         }
