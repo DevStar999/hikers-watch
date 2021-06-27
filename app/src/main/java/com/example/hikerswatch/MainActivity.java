@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String appendString(String string, String defaultValue, String partToAppend, String spaceFromNextPart) {
-        if (partToAppend != null && partToAppend.isEmpty()) {
+        if (partToAppend == null || partToAppend.isEmpty()) {
             string += defaultValue + spaceFromNextPart;
         }
-        else if (partToAppend != null) {
+        else {
             string += partToAppend + spaceFromNextPart;
         }
         return  string;
