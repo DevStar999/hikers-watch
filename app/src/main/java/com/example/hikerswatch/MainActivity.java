@@ -40,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private String appendString(String string, String partToAppend, String spaceFromNextPart) {
-        if (partToAppend != null && !partToAppend.isEmpty()) {
+    private String appendString(String string, String defaultValue, String partToAppend, String spaceFromNextPart) {
+        if (partToAppend != null && partToAppend.isEmpty()) {
+            string += defaultValue + spaceFromNextPart;
+        }
+        else if (partToAppend != null) {
             string += partToAppend + spaceFromNextPart;
         }
         return  string;
@@ -49,42 +52,45 @@ public class MainActivity extends AppCompatActivity {
 
     private void setLocationTextOnTextView(Location locationOnMap) {
         Log.i("Info", "Location = " + locationOnMap.toString());
+        String textForLocationTextView = "";
+        textForLocationTextView += appendString("Latitude: ", "We could not find Latitude :(",
+                Double.toString(BigDecimal
+                        .valueOf(locationOnMap.getLatitude()).setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue()), "\n\n");
+
+        textForLocationTextView += appendString("Longitude: ", "We could not find Longitude :(",
+                Double.toString(BigDecimal
+                        .valueOf(locationOnMap.getLongitude()).setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue()), "\n\n");
+
+        textForLocationTextView += appendString("Accuracy: ", "We could not find Accuracy :(",
+                Double.toString(BigDecimal
+                        .valueOf(locationOnMap.getAccuracy()).setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue()), "\n\n");
+
+        textForLocationTextView += appendString("Altitude: ", "We could not find Altitude :(",
+                Double.toString(BigDecimal
+                        .valueOf(locationOnMap.getAltitude()).setScale(2, RoundingMode.HALF_UP)
+                        .doubleValue()), "\n\n");
 
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         try {
             List<Address> addressList = geocoder.getFromLocation(locationOnMap.getLatitude(),
                     locationOnMap.getLongitude(), 1);
             if (addressList != null && !addressList.isEmpty()) {
-                String textForLocationTextView = "";
-
-                textForLocationTextView += appendString("Latitude: ",
-                        Double.toString(BigDecimal
-                                .valueOf(locationOnMap.getLatitude()).setScale(2, RoundingMode.HALF_UP)
-                                .doubleValue()), "\n\n");
-
-                textForLocationTextView += appendString("Longitude: ",
-                        Double.toString(BigDecimal
-                                .valueOf(locationOnMap.getLongitude()).setScale(2, RoundingMode.HALF_UP)
-                                .doubleValue()), "\n\n");
-
-                textForLocationTextView += appendString("Accuracy: ",
-                        Double.toString(BigDecimal
-                                .valueOf(locationOnMap.getAccuracy()).setScale(2, RoundingMode.HALF_UP)
-                                .doubleValue()), "\n\n");
-
-                textForLocationTextView += appendString("Altitude: ",
-                        Double.toString(BigDecimal
-                                .valueOf(locationOnMap.getAltitude()).setScale(2, RoundingMode.HALF_UP)
-                                .doubleValue()), "\n\n");
-
-                textForLocationTextView += appendString("Address: ",
+                Log.i("Info", "Address Object: " + addressList.get(0).toString());
+                textForLocationTextView += appendString("Address: ", "We could not find Address :(",
                         addressList.get(0).getThoroughfare(), "");
-
-                locationTextView.setText(textForLocationTextView);
+            }
+            else {
+                textForLocationTextView += "Address: " + "We could not find Address :(";
             }
         } catch (IOException e) {
             e.printStackTrace();
+            textForLocationTextView += "Address: " + "We could not find Address :(";
         }
+
+        locationTextView.setText(textForLocationTextView);
     }
 
     @Override
