@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationListener locationListener;
 
     private void initialise() {
-        locationTextView = findViewById(R.id.locationTextView);
+        locationTextView = findViewById(R.id.location_text_view);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
