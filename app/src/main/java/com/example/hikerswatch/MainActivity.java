@@ -1,10 +1,5 @@
 package com.example.hikerswatch;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,6 +12,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -43,11 +43,10 @@ public class MainActivity extends AppCompatActivity {
     private String appendString(String string, String defaultValue, String partToAppend, String spaceFromNextPart) {
         if (partToAppend == null || partToAppend.isEmpty()) {
             string += defaultValue + spaceFromNextPart;
-        }
-        else {
+        } else {
             string += partToAppend + spaceFromNextPart;
         }
-        return  string;
+        return string;
     }
 
     private void setLocationTextOnTextView(Location locationOnMap) {
@@ -81,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Info", "Address Object: " + addressList.get(0).toString());
                 textForLocationTextView += appendString("Address: ", "We could not find address :(",
                         addressList.get(0).getThoroughfare(), "");
-            }
-            else {
+            } else {
                 textForLocationTextView += "Address: " + "We could not find address :(";
             }
         } catch (IOException e) {
@@ -108,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 the battery life of the user's phone and how frequently we want to be updated of the
                 user's location based on time and distance
                 */
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        2000,0, locationListener);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                            2000, 0, locationListener);
                 }
             }
         }
@@ -128,12 +126,11 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Asking for user to grant permission to use their location
             ActivityCompat.requestPermissions(this,
-                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        else {
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
             // If we did get the permission, let's get some updates on the location of the user
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    2000,0, locationListener);
+                    2000, 0, locationListener);
             Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             setLocationTextOnTextView(lastKnownLocation);
         }
